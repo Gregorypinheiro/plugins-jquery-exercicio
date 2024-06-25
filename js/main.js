@@ -1,27 +1,17 @@
-$(document).ready(function () {
-    $('#carousel-imagens').slick({
-        autoplay: true,
-        arrows: false
-    });
-
+$(document).ready(function() {
+        // Adiciona um método para validar mínimo de dois nomes
+        $.validator.addMethod("doisNomesMinimo", function(value, element) {
+            // Dividir o valor do campo em palavras
+            var nomes = value.trim().split(" ");
+            // Verificar se existem pelo menos dois nomes
+            return nomes.length >= 2;
+        }, "Por favor, insira pelo menos dois nomes.");
     
-
-    $('#telefone').mask('(00) 00000-0000', {
-    placeholder: '(DDD) 12345-6789'
-    })
-
-    $('#cpf').mask('000.000.000-00', {
-    placeholder: '123.456.789-00'
-    })
-
-    $('#cep').mask('00000-000', {
-    placeholder: '012345-678'
-    })
-
-$('form').validate({
+        $('form').validate({
     rules: {
         nome: {
-            required: true
+            required: true,
+            doisNomesMinimo: true
         },
         email: {
             required: true,
@@ -57,5 +47,22 @@ $('form').validate({
     invalidHandler: function (form, validator) {
         alert("Por favor, preencha os campos para prosseguir com a compra!");
     }
-})
-})
+});
+
+    $('#telefone').mask('(00) 00000-0000', {
+    placeholder: '(DDD) 12345-6789'
+    });
+
+    $('#cpf').mask('000.000.000-00', {
+    placeholder: '123.456.789-00'
+    });
+
+    $('#cep').mask('00000-000', {
+    placeholder: '012345-678'
+    });
+
+    $('#carousel-imagens').slick({
+        autoplay: true,
+        arrows: false
+    });
+});
